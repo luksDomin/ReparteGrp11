@@ -13,10 +13,11 @@ public class Grupo {
     public Grupo(){
 
     }
-	
+    
     public Grupo(String nombre, HashSet<Usuario> users) {
         id = new Random().nextInt();
         this.nombre = nombre;
+        this.users = new HashSet<>();
         setUsers(users);
 
     }
@@ -47,26 +48,23 @@ public class Grupo {
 	public void anadirGasto(Gasto gasto) {
 	
 	}
-
-	public void anhadirUsuario(Usuario u) {
-		if(u != null && !this.users.contains(u)) {
-			this.users.add(u);
-			System.out.println("Usuario " + u + " anhadido correctamente al grupo.");
-		}
-		else {
-			System.out.println("Error: el usuario " + u + " no existe o ya esta incluido en el grupo.");
-		}
-	}
 	
 	public void anhadirMultiplesUsuarios(ArrayList<Usuario> usuarios) {
 		if(usuarios != null && !usuarios.isEmpty()) {
 			for(Usuario u : usuarios) {
-				anhadirUsuario(u);
+				if(u != null && !this.users.contains(u)) {
+					this.users.add(u);
+					//System.out.println("Usuario " + u + " anhadido correctamente al grupo.");
+				}
+				else {
+					// EXCEPCION o RETURN
+					//System.out.println("Error: el usuario " + u + " no existe o ya esta incluido en el grupo.");
+				}
 			}
-			System.out.println("Los usuarios han sido anhadidos correctamente al grupo.");
 		}
 		else {
-			System.out.println("Error: la lista no existe o está vacía.");
+			// EXCEPCION o RETURN
+			//System.out.println("Error: la lista no existe o está vacía.");
 		}
 	}
 }
