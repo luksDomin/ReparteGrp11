@@ -10,6 +10,10 @@ public class Grupo {
     String nombre;
     HashSet<Usuario> users;
 
+    public Grupo(){
+
+    }
+	
     public Grupo(String nombre, HashSet<Usuario> users) {
         id = new Random().nextInt();
         this.nombre = nombre;
