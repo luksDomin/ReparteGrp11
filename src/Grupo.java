@@ -12,7 +12,7 @@ public class Grupo {
 
     public Grupo(String nombre, HashSet<Usuario> users) {
         id = new Random().nextInt();
-        nombre = this.nombre;
+        this.nombre = nombre;
         setUsers(users);
 
     }
