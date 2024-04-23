@@ -3,7 +3,8 @@ package Sprint1;
 import java.util.Random;
 
 public class Gasto {
-	
+	private final Integer valorMin = 1;
+	private final Integer valorMax = 1000;
 	private Integer id;
 	private Double cantidad;
 	private Grupo grupo;
@@ -14,6 +15,19 @@ public class Gasto {
 	}
 	
 	public Gasto(Double cantidad, Grupo grupo, Usuario usuarioCreador) {
+		if(cantidad < valorMin || cantidad > valorMax) {
+			//lanzar excecpcion
+			System.out.println("Valor cantidad incorrecto");
+			
+		}
+		if(grupo == null) {
+			//lanzar excecpcion
+			System.out.println("Valor de grupo NULL");
+		}
+		if(usuarioCreador == null) {
+			//lanzar excecpcion
+			System.out.println("Valor de UsuarioCreador NULL");
+		}
 		this.id = new Random().nextInt();
 		this.cantidad = cantidad;
 		this.grupo = grupo;
