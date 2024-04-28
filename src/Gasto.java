@@ -44,7 +44,8 @@ public class Gasto {
 	}
 
 	public void setCantidad(Double cantidad) {
-		this.cantidad = cantidad;
+		if(cantidad >= 1 && cantidad <= 1000)
+			this.cantidad = cantidad;
 	}
 
 	public Grupo getGrupo() {
@@ -52,7 +53,8 @@ public class Gasto {
 	}
 
 	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
+		if(grupo != null)
+			this.grupo = grupo;
 	}
 
 	public Usuario getUsuarioCreador() {
@@ -60,7 +62,8 @@ public class Gasto {
 	}
 
 	public void setUsuarioCreador(Usuario usuarioCreador) {
-		this.usuarioCreador = usuarioCreador;
+		if(usuarioCreador != null)
+			this.usuarioCreador = usuarioCreador;
 	}
 	
 	
