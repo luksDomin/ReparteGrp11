@@ -41,7 +41,8 @@ public class Grupo {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if(nombre != null)
+            this.nombre = nombre;
     }
     
     
@@ -59,6 +60,25 @@ public class Grupo {
 				else {
 					// EXCEPCION o RETURN
 					//System.out.println("Error: el usuario " + u + " no existe o ya esta incluido en el grupo.");
+				}
+			}
+		}
+		else {
+			// EXCEPCION o RETURN
+			//System.out.println("Error: la lista no existe o está vacía.");
+		}
+	}
+
+    public void eliminarMultiplesUsuarios(ArrayList<Usuario> usuarios) {
+		if(usuarios != null && !usuarios.isEmpty()) {
+			for(Usuario u : usuarios) {
+				if(u != null && !this.users.contains(u)) {
+					this.users.remove(u);
+					//System.out.println("Usuario " + u + " eliminado correctamente del grupo.");
+				}
+				else {
+					// EXCEPCION o RETURN
+					//System.out.println("Error: el usuario " + u + " no existe o ya no esta incluido en el grupo.");
 				}
 			}
 		}
