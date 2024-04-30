@@ -1,5 +1,7 @@
 package Sprint1;
 
+import java.util.Objects;
+
 public class Usuario {
 
     private Integer id;
@@ -49,4 +51,20 @@ public class Usuario {
     public void crearGasto(Double cantidad, Grupo grupo) {
         Gasto g = new Gasto(cantidad, grupo, this);
     }
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, nombre);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(id, other.id);
+	}
 }
