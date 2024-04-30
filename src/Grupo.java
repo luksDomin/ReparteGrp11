@@ -15,12 +15,35 @@ public class Grupo {
 	}
 
 	public Grupo(String nombre, HashSet<Usuario> users) {
-		id = new Random().nextInt();
-		this.nombre = nombre;
-		this.users = new HashSet<>();
-		setUsers(users);
-
-	}
+    	
+    	if(nombre == null) {
+    		//EXCEPCION O RETURN
+			System.out.println("El nombre del grupo debe ser no nulo");
+    	} else {
+    	
+	    	if(!nombre.matches("^[a-zA-Z0-9]+$")) {
+	    		//EXCEPCION O RETURN
+				System.out.println("El nombre del grupo debe estar formado por letras y números");
+	    	} else {
+	    	
+		    	if(users.equals(null)) {
+		    		//EXCEPCION O RETURN
+					System.out.println("El grupo de usuarios debe ser no nulo");
+		    	} else {
+		    	
+			    	if(users.isEmpty()) {
+			    		//EXCEPCION O RETURN
+						System.out.println("El grupo de usuarios no puede estar vacío");
+			    	} else {
+			    	
+				        id = new Random().nextInt();
+				        this.nombre = nombre;
+				        this.users = users;
+			    	}
+		    	}
+	    	}
+    	}
+    }
 
 	public HashSet<Usuario> getUsers() {
 		return users;
