@@ -62,7 +62,7 @@ class T04_AnhadirUsuarios {
 		ArrayList<Usuario> retornoList = g1.anhadirUsuarios(paramList);
 
 		// Assert
-		boolean mismaLongitudListas = retornoList.size() == paramList.size(); 
+		boolean mismaLongitudListas = retornoList.size() == paramList.size();
 		assertTrue(mismaLongitudListas);
 		assertEquals(paramList, retornoList);
 	}
@@ -76,7 +76,7 @@ class T04_AnhadirUsuarios {
 		ArrayList<Usuario> paramList = new ArrayList<>();
 		ArrayList<Usuario> retornoList = g1.anhadirUsuarios(paramList);
 		HashSet<Usuario> usuariosInicial = g1.getUsers();
-		
+
 		// Assert
 		assertTrue(retornoList.isEmpty());
 		assertEquals(usuariosInicial, g1.getUsers());
@@ -93,12 +93,12 @@ class T04_AnhadirUsuarios {
 		Usuario u3 = new Usuario(3, "brais");
 		paramList.add(u3);
 		paramList.add(u1);
-		
+
 		ArrayList<Usuario> retornoList = g1.anhadirUsuarios(paramList);
-		
+
 		// Assert
 		assertFalse(retornoList.isEmpty());
-		boolean mismaLongitudListas = retornoList.size() == paramList.size(); 
+		boolean mismaLongitudListas = retornoList.size() == paramList.size();
 		assertFalse(mismaLongitudListas);
 		assertNotEquals(paramList, retornoList);
 	}

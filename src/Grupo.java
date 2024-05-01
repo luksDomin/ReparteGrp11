@@ -1,4 +1,4 @@
-package Sprint1;
+package entidades;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,15 +17,13 @@ public class Grupo {
 
 	public Grupo(String nombre, HashSet<Usuario> users) {
 		if (nombre != null) {
-			if (nombre.matches("^[a-zA-Z0-9]+$")) {
-				if (!users.equals(null)) {
+			if (nombre.matches("^[a-zA-Z0-9]+$"))
+				if (!users.equals(null))
 					if (!users.isEmpty()) {
 						id = new Random().nextInt();
 						this.nombre = nombre;
 						this.users = users;
 					}
-				}
-			}
 		}
 	}
 
@@ -52,7 +50,14 @@ public class Grupo {
 			this.nombre = nombre;
 	}
 
-	public void anadirGasto(Gasto gasto) {
+	public void anadirGasto(Usuario acreedor, Gasto gasto) {
+
+		int numUsuarios = this.getUsers().size();
+		Double cantidadRepartida = gasto.getCantidad() / numUsuarios;
+
+		for (Usuario miembroGrupo : this.getUsers()) {
+			miembroGrupo.addAmortizacion(acreedor, cantidadRepartida);
+		}
 
 	}
 
@@ -66,33 +71,40 @@ public class Grupo {
 					usuariosAnhadidos.add(usuario);
 				}
 		}
-		// si la lista que se recibe como argumento no esta inicializada se devuelve una
-		// lista de usuarios vacia (no se añadió ninguno)
-		// si la lista que se recibe como argumento está vacía se devuelve una lista de
-		// usuarios vacia (no se añadió ninguno)
-		// si se ha añadido algun usuario al Grupo, la lista que se devuelve contendrá
-		// al menos un usuario
+		/*
+		 * si la lista que se recibe como argumento no esta inicializada se devuelve una
+		 * lista de usuarios vacia (no se añadió ninguno)
+		 *
+		 * si la lista que se recibe como argumento está vacía se devuelve una lista de
+		 * usuarios vacia (no se añadió ninguno)
+		 *
+		 * si se ha añadido algun usuario al Grupo, la lista que se devuelve contendrá
+		 * al menos un usuario
+		 */
 		return usuariosAnhadidos;
 	}
 
 	public ArrayList<Usuario> eliminarUsuarios(ArrayList<Usuario> usuarios) {
-		ArrayList<Usuario> usuariosEliminados = new ArrayList<Usuario>(); // Lista de usuarios que se eliminarán del
-																			// Grupo
+		// Lista de usuarios que se eliminarán del Grupo
+		ArrayList<Usuario> usuariosEliminados = new ArrayList<Usuario>();
 		if (usuarios != null) {
 			for (Usuario usuario : usuarios)
 				if (usuario != null && this.users.contains(usuario)) { // si es un usuario válido
-					// usuario eliminado correctamente, se añade a la lista que se usará como
-					// retorno
+					// usuario eliminado, se añade a la lista que se usará como retorno
 					this.users.remove(usuario);
 					usuariosEliminados.add(usuario);
 				}
 		}
-		// si la lista que se recibe como argumento no esta inicializada se devuelve una
-		// lista de usuarios vacia (no se eliminó ninguno)
-		// si la lista que se recibe como argumento está vacía se devuelve una lista de
-		// usuarios vacia (no se eliminó ninguno)
-		// si se ha eliminado algun usuario del Grupo, la lista que se devuelve
-		// contendrá al menos un usuario
+		/*
+		 * - si la lista que se recibe como argumento no esta inicializada se devuelve
+		 * una lista de usuarios vacia (no se eliminó ninguno)
+		 * 
+		 * - si la lista que se recibe como argumento está vacía se devuelve una lista
+		 * de usuarios vacia (no se eliminó ninguno)
+		 *
+		 * - si se ha eliminado algun usuario del Grupo, la lista que se devuelve
+		 * contendrá al menos un usuario
+		 */
 		return usuariosEliminados;
 	}
 }
