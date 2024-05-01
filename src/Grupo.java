@@ -1,8 +1,8 @@
+
 package entidades;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 
 public class Grupo {
@@ -18,12 +18,13 @@ public class Grupo {
 	public Grupo(String nombre, HashSet<Usuario> users) {
 		if (nombre != null) {
 			if (nombre.matches("^[a-zA-Z0-9]+$"))
-				if (!users.equals(null))
+				if (users != null){
 					if (!users.isEmpty()) {
 						id = new Random().nextInt();
 						this.nombre = nombre;
 						this.users = users;
 					}
+				}
 		}
 	}
 
