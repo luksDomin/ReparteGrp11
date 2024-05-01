@@ -6,6 +6,7 @@ public class Usuario {
 
     private Integer id;
     private String nombre;
+    private Amortizacion amortizaciones[];
 
     public Usuario() {
 
@@ -48,9 +49,36 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public void crearGasto(Double cantidad, Grupo grupo) {
+    public Amortizacion[] getAmortizaciones() {
+		return amortizaciones;
+	}
+
+	public void setAmortizaciones(Amortizacion[] amortizaciones) {
+		this.amortizaciones = amortizaciones;
+	}
+	
+	
+
+	public void crearGasto(Double cantidad, Grupo grupo) {
         Gasto g = new Gasto(cantidad, grupo, this);
     }
+    
+    public void addAmortizacion(Usuario acreedor, Double cantidad) {
+    	
+    	for(Amortizacion amortizacion : this.amortizaciones) {
+    		if (amortizacion.getAcreedor().equals(acreedor)) {
+    			if(!amortizacion.getPagado()) {
+    				amortizacion.setCantidad(amortizacion.getCantidad() + cantidad);
+    			} else {
+    				amortizacion.setCantidad(cantidad);
+    				amortizacion.setPagado(false);
+    			}
+    		}
+    	}
+    	
+    }
+    
+    
 
 	@Override
 	public int hashCode() {
