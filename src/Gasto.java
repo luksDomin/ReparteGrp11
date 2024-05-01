@@ -8,7 +8,7 @@ public class Gasto {
 	private Integer id;
 	private Double cantidad;
 	private Grupo grupo;
-	private Usuario usuarioCreador;
+	private Usuario usuarioCreador; // El que lo crea es el que lo pagó (el acreedor).
 	
 	public Gasto() {
 		
@@ -31,7 +31,7 @@ public class Gasto {
 		this.id = new Random().nextInt();
 		this.cantidad = cantidad;
 		this.grupo = grupo;
-		grupo.anadirGasto(this);
+		grupo.anadirGasto(usuarioCreador, this);
 		this.usuarioCreador = usuarioCreador;
 	}
 
@@ -66,7 +66,6 @@ public class Gasto {
 			this.usuarioCreador = usuarioCreador;
 	}
 	
-	
-	
+
 	
 }
