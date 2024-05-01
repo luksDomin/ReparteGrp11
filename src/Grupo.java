@@ -2,6 +2,7 @@ package Sprint1;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 
 public class Grupo {
@@ -15,35 +16,18 @@ public class Grupo {
 	}
 
 	public Grupo(String nombre, HashSet<Usuario> users) {
-    	
-    	if(nombre == null) {
-    		//EXCEPCION O RETURN
-			System.out.println("El nombre del grupo debe ser no nulo");
-    	} else {
-    	
-	    	if(!nombre.matches("^[a-zA-Z0-9]+$")) {
-	    		//EXCEPCION O RETURN
-				System.out.println("El nombre del grupo debe estar formado por letras y números");
-	    	} else {
-	    	
-		    	if(users.equals(null)) {
-		    		//EXCEPCION O RETURN
-					System.out.println("El grupo de usuarios debe ser no nulo");
-		    	} else {
-		    	
-			    	if(users.isEmpty()) {
-			    		//EXCEPCION O RETURN
-						System.out.println("El grupo de usuarios no puede estar vacío");
-			    	} else {
-			    	
-				        id = new Random().nextInt();
-				        this.nombre = nombre;
-				        this.users = users;
-			    	}
-		    	}
-	    	}
-    	}
-    }
+		if (nombre != null) {
+			if (nombre.matches("^[a-zA-Z0-9]+$")) {
+				if (!users.equals(null)) {
+					if (!users.isEmpty()) {
+						id = new Random().nextInt();
+						this.nombre = nombre;
+						this.users = users;
+					}
+				}
+			}
+		}
+	}
 
 	public HashSet<Usuario> getUsers() {
 		return users;
@@ -68,52 +52,47 @@ public class Grupo {
 			this.nombre = nombre;
 	}
 
-	
-	
-	public void anadirGasto(Usuario acreedor, Gasto gasto) {
-		
-		int numUsuarios = this.getUsers().size();
-		Double cantidadRepartida = gasto.getCantidad() / numUsuarios;
-		
-		for(Usuario miembroGrupo : this.getUsers()) {
-			miembroGrupo.addAmortizacion(acreedor, cantidadRepartida);
-		}
-		
+	public void anadirGasto(Gasto gasto) {
+
 	}
 
-	public void anhadirMultiplesUsuarios(ArrayList<Usuario> usuarios) {
+	public ArrayList<Usuario> anhadirUsuarios(ArrayList<Usuario> usuarios) {
+		ArrayList<Usuario> usuariosAnhadidos = new ArrayList<Usuario>(); // Lista de usuarios que se añadiran al Grupo
 		if (usuarios != null) {
-			for (Usuario u : usuarios) {
-				if (u != null && !this.users.contains(u)) {
-					this.users.add(u);
-					// System.out.println("Usuario " + u + " anhadido correctamente al grupo.");
-				} else {
-					// EXCEPCION o RETURN
-					// System.out.println("Error: el usuario " + u + " no existe o ya esta incluido
-					// en el grupo.");
+			for (Usuario usuario : usuarios)
+				if (usuario != null && !this.users.contains(usuario)) { // si es un usuario válido
+					// inserción del usuario correcta, se añade a la lista que se usará como retorno
+					this.users.add(usuario);
+					usuariosAnhadidos.add(usuario);
 				}
-			}
-		} else {
-			// EXCEPCION o RETURN
-			// System.out.println("Error: la lista no existe o está vacía.");
 		}
+		// si la lista que se recibe como argumento no esta inicializada se devuelve una
+		// lista de usuarios vacia (no se añadió ninguno)
+		// si la lista que se recibe como argumento está vacía se devuelve una lista de
+		// usuarios vacia (no se añadió ninguno)
+		// si se ha añadido algun usuario al Grupo, la lista que se devuelve contendrá
+		// al menos un usuario
+		return usuariosAnhadidos;
 	}
 
-	public void eliminarMultiplesUsuarios(ArrayList<Usuario> usuarios) {
-		if (usuarios != null && !usuarios.isEmpty()) {
-			for (Usuario u : usuarios) {
-				if (u != null && !this.users.contains(u)) {
-					this.users.remove(u);
-					// System.out.println("Usuario " + u + " eliminado correctamente del grupo.");
-				} else {
-					// EXCEPCION o RETURN
-					// System.out.println("Error: el usuario " + u + " no existe o ya no esta
-					// incluido en el grupo.");
+	public ArrayList<Usuario> eliminarUsuarios(ArrayList<Usuario> usuarios) {
+		ArrayList<Usuario> usuariosEliminados = new ArrayList<Usuario>(); // Lista de usuarios que se eliminarán del
+																			// Grupo
+		if (usuarios != null) {
+			for (Usuario usuario : usuarios)
+				if (usuario != null && this.users.contains(usuario)) { // si es un usuario válido
+					// usuario eliminado correctamente, se añade a la lista que se usará como
+					// retorno
+					this.users.remove(usuario);
+					usuariosEliminados.add(usuario);
 				}
-			}
-		} else {
-			// EXCEPCION o RETURN
-			// System.out.println("Error: la lista no existe o está vacía.");
 		}
+		// si la lista que se recibe como argumento no esta inicializada se devuelve una
+		// lista de usuarios vacia (no se eliminó ninguno)
+		// si la lista que se recibe como argumento está vacía se devuelve una lista de
+		// usuarios vacia (no se eliminó ninguno)
+		// si se ha eliminado algun usuario del Grupo, la lista que se devuelve
+		// contendrá al menos un usuario
+		return usuariosEliminados;
 	}
 }
