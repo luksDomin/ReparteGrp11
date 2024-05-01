@@ -1,12 +1,14 @@
 package Sprint1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Usuario {
 
     private Integer id;
     private String nombre;
-    private Amortizacion amortizaciones[];
+    private List<Amortizacion> amortizaciones;
 
     public Usuario() {
 
@@ -18,6 +20,7 @@ public class Usuario {
             if (nombre != null) {
                 if (nombre.matches("^[a-zA-Z0-9]+$")) {
                     this.nombre = nombre;
+                    this.amortizaciones = new ArrayList<Amortizacion>();
                 } else {
                     //lanzar excepcion
                     //System.out.println("nombre no puede contener otra cosa que numeros y letras");
@@ -49,11 +52,11 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public Amortizacion[] getAmortizaciones() {
+    public List<Amortizacion> getAmortizaciones() {
 		return amortizaciones;
 	}
 
-	public void setAmortizaciones(Amortizacion[] amortizaciones) {
+	public void setAmortizaciones(List<Amortizacion> amortizaciones) {
 		this.amortizaciones = amortizaciones;
 	}
 	
@@ -78,7 +81,29 @@ public class Usuario {
     	
     }
     
+    public List<Amortizacion> consultarAmortizaciones() {
+    	
+    	List<Amortizacion> deudasPendientes = new ArrayList<Amortizacion>();
+    	
+    	for(Amortizacion amortizacion : this.amortizaciones) {
+    		if (!amortizacion.getPagado()) {
+    			deudasPendientes.add(amortizacion);
+    		}
+    	}
+    	
+    	return deudasPendientes;
+    }
     
+    public void pagar(Usuario acreedor) {
+    	
+    	for(Amortizacion amortizacion : this.amortizaciones) {
+    		if (amortizacion.getAcreedor().equals(acreedor)) {
+    			if(!amortizacion.getPagado()) {
+    				amortizacion.amortizar();
+    			}
+    		}
+    	}
+    }
 
 	@Override
 	public int hashCode() {
