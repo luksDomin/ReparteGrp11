@@ -68,8 +68,17 @@ public class Grupo {
 			this.nombre = nombre;
 	}
 
-	public void anadirGasto(Gasto gasto) {
-
+	
+	
+	public void anadirGasto(Usuario acreedor, Gasto gasto) {
+		
+		int numUsuarios = this.getUsers().size();
+		Double cantidadRepartida = gasto.getCantidad() / numUsuarios;
+		
+		for(Usuario miembroGrupo : this.getUsers()) {
+			miembroGrupo.addAmortizacion(acreedor, cantidadRepartida);
+		}
+		
 	}
 
 	public void anhadirMultiplesUsuarios(ArrayList<Usuario> usuarios) {
