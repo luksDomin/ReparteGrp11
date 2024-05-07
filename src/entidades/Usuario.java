@@ -71,7 +71,7 @@ public class Usuario {
 
 	public List<Amortizacion> consultarAmortizaciones() {
 
-		List<Amortizacion> deudasPendientes = new ArrayList<Amortizacion>();
+		List<Amortizacion> deudasPendientes=new ArrayList<Amortizacion>();
 
 		for (Amortizacion amortizacion : this.amortizaciones) {
 			if (!amortizacion.getPagado()) {
