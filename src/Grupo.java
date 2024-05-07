@@ -1,4 +1,3 @@
-
 package entidades;
 
 import java.util.ArrayList;
@@ -7,72 +6,82 @@ import java.util.Random;
 
 public class Grupo {
 
-	Integer id;
-	String nombre;
-	HashSet<Usuario> users;
+    Integer id;
+    String nombre;
+    HashSet<Usuario> users;
 
-	public Grupo() {
+    public Grupo() {
 
-	}
+    }
 
-	public Grupo(String nombre, HashSet<Usuario> users) {
-		if (nombre != null) {
-			if (nombre.matches("^[a-zA-Z0-9]+$"))
-				if (users != null){
-					if (!users.isEmpty()) {
-						id = new Random().nextInt();
-						this.nombre = nombre;
-						this.users = users;
-					}
-				}
-		}
-	}
+    public Grupo(String nombre, HashSet<Usuario> users) {
+        if (nombre != null) {
+            if (nombre.matches("^[a-zA-Z0-9]+$")) {
+                if (users != null) {
+                    if (!users.isEmpty()) {
+                        id = new Random().nextInt();
+                        this.nombre = nombre;
+                        this.users = users;
+                    }
+                }
+            }
+        }
+    }
 
-	public HashSet<Usuario> getUsers() {
-		return users;
-	}
+    public HashSet<Usuario> getUsers() {
+        return users;
+    }
 
-	public void setUsers(HashSet<Usuario> users) {
-		if (users != null && !users.isEmpty()) {
-			this.users.addAll(users);
-		}
-	}
+    public void setUsers(HashSet<Usuario> users) {
+        if (users != null && !users.isEmpty()) {
+            this.users.addAll(users);
+        }
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setNombre(String nombre) {
-		if (nombre != null)
-			this.nombre = nombre;
-	}
+    public void setNombre(String nombre) {
+        if (nombre != null) {
+            this.nombre = nombre;
+        }
+    }
 
-	public void anadirGasto(Usuario acreedor, Gasto gasto) {
+    public void anadirGasto(Usuario acreedor, Gasto gasto) {
 
-		int numUsuarios = this.getUsers().size();
-		Double cantidadRepartida = gasto.getCantidad() / numUsuarios;
+        if (acreedor != null && gasto != null) {
 
-		for (Usuario miembroGrupo : this.getUsers()) {
-			miembroGrupo.addAmortizacion(acreedor, cantidadRepartida);
-		}
+            int numUsuarios = this.getUsers().size();
 
-	}
+            Double cantidad = gasto.getCantidad();
 
-	public ArrayList<Usuario> anhadirUsuarios(ArrayList<Usuario> usuarios) {
-		ArrayList<Usuario> usuariosAnhadidos = new ArrayList<Usuario>(); // Lista de usuarios que se añadiran al Grupo
-		if (usuarios != null) {
-			for (Usuario usuario : usuarios)
-				if (usuario != null && !this.users.contains(usuario)) { // si es un usuario válido
-					// inserción del usuario correcta, se añade a la lista que se usará como retorno
-					this.users.add(usuario);
-					usuariosAnhadidos.add(usuario);
-				}
-		}
-		/*
+            if (cantidad != null) {
+                Double cantidadRepartida = cantidad / numUsuarios;
+
+                for (Usuario miembroGrupo : this.getUsers()) {
+                    miembroGrupo.addAmortizacion(acreedor, cantidadRepartida);
+                }
+            }
+        }
+    }
+
+    public ArrayList<Usuario> anhadirUsuarios(ArrayList<Usuario> usuarios) {
+        ArrayList<Usuario> usuariosAnhadidos = new ArrayList<Usuario>(); // Lista de usuarios que se añadiran al Grupo
+        if (usuarios != null) {
+            for (Usuario usuario : usuarios) {
+                if (usuario != null && !this.users.contains(usuario)) { // si es un usuario válido
+                    // inserción del usuario correcta, se añade a la lista que se usará como retorno
+                    this.users.add(usuario);
+                    usuariosAnhadidos.add(usuario);
+                }
+            }
+        }
+        /*
 		 * si la lista que se recibe como argumento no esta inicializada se devuelve una
 		 * lista de usuarios vacia (no se añadió ninguno)
 		 *
@@ -81,22 +90,23 @@ public class Grupo {
 		 *
 		 * si se ha añadido algun usuario al Grupo, la lista que se devuelve contendrá
 		 * al menos un usuario
-		 */
-		return usuariosAnhadidos;
-	}
+         */
+        return usuariosAnhadidos;
+    }
 
-	public ArrayList<Usuario> eliminarUsuarios(ArrayList<Usuario> usuarios) {
-		// Lista de usuarios que se eliminarán del Grupo
-		ArrayList<Usuario> usuariosEliminados = new ArrayList<Usuario>();
-		if (usuarios != null) {
-			for (Usuario usuario : usuarios)
-				if (usuario != null && this.users.contains(usuario)) { // si es un usuario válido
-					// usuario eliminado, se añade a la lista que se usará como retorno
-					this.users.remove(usuario);
-					usuariosEliminados.add(usuario);
-				}
-		}
-		/*
+    public ArrayList<Usuario> eliminarUsuarios(ArrayList<Usuario> usuarios) {
+        // Lista de usuarios que se eliminarán del Grupo
+        ArrayList<Usuario> usuariosEliminados = new ArrayList<Usuario>();
+        if (usuarios != null) {
+            for (Usuario usuario : usuarios) {
+                if (usuario != null && this.users.contains(usuario)) { // si es un usuario válido
+                    // usuario eliminado, se añade a la lista que se usará como retorno
+                    this.users.remove(usuario);
+                    usuariosEliminados.add(usuario);
+                }
+            }
+        }
+        /*
 		 * - si la lista que se recibe como argumento no esta inicializada se devuelve
 		 * una lista de usuarios vacia (no se eliminó ninguno)
 		 * 
@@ -105,7 +115,7 @@ public class Grupo {
 		 *
 		 * - si se ha eliminado algun usuario del Grupo, la lista que se devuelve
 		 * contendrá al menos un usuario
-		 */
-		return usuariosEliminados;
-	}
+         */
+        return usuariosEliminados;
+    }
 }

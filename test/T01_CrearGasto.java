@@ -1,5 +1,9 @@
 package Sprint1;
 
+import entidades.Usuario;
+import entidades.Grupo;
+import entidades.Gasto;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashSet;
@@ -56,9 +60,6 @@ class T01_CrearGasto {
     }
     
     
-    
-    
-    
     /*Pruebas de caja blanca*/
     
     /*Caso 4: cantidad < 0, grupo válido, usuario válido.*/
@@ -68,7 +69,7 @@ class T01_CrearGasto {
         Gasto gasto = new Gasto(-5.0, grupo, paula);
         
         // Assert
-        assertNotEquals(gasto.getCantidad(),-5.0); // Verifica que la cantidad del gasto sea negativa
+        assertNull(gasto.getCantidad()); // Verifica que la cantidad del gasto sea negativa
     }
     
     /*Caso 5: cantidad > 1000, grupo válido, usuario válido.*/
