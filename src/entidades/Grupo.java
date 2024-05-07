@@ -11,7 +11,7 @@ public class Grupo {
     HashSet<Usuario> users;
 
     public Grupo() {
-
+    	this.users = new HashSet<>();
     }
 
     public Grupo(String nombre, HashSet<Usuario> users) {

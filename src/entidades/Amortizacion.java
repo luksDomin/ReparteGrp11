@@ -1,5 +1,7 @@
 package entidades;
 
+import java.util.Objects;
+
 public class Amortizacion {
 
 	Double cantidad;
@@ -49,6 +51,24 @@ public class Amortizacion {
 
 	public void amortizar() {
 		this.setPagado(true);
+	}
+	
+	
+	@Override
+	public boolean equals(Object o) {
+	    // self check
+	    if (this == o)
+	        return true;
+	    // null check
+	    if (o == null)
+	        return false;
+	    // type check and cast
+	    if (getClass() != o.getClass())
+	        return false;
+	    Amortizacion a = (Amortizacion) o;
+	    // field comparison
+	    return Objects.equals(acreedor.getNombre(), a.acreedor.getNombre())
+	            && Objects.equals(deudor.getNombre(), a.deudor.getNombre());
 	}
 
 }

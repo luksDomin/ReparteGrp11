@@ -54,24 +54,30 @@ public class Usuario {
 
 	
 	public void addAmortizacion(Usuario acreedor, Double cantidad) {
-
+		int encontrado = 0;
 		// Nuevas amortizaciones
 		for (Amortizacion amortizacion : this.amortizaciones) {
 			if (amortizacion.getAcreedor().equals(acreedor)) {
-				if (!amortizacion.getPagado()) {
-					amortizacion.setCantidad(amortizacion.getCantidad() + cantidad);
-				} else {
+				encontrado = 1;
+				if (amortizacion.getPagado()) {
 					amortizacion.setCantidad(cantidad);
 					amortizacion.setPagado(false);
+				}else {
+					amortizacion.setCantidad(amortizacion.getCantidad() + cantidad);
 				}
 			}
 		}
+		if(encontrado == 0) {
+			Amortizacion a = new Amortizacion(cantidad,acreedor,this);
+			a.setPagado(false);
+			this.amortizaciones.add(a);
 
+		}
 	}
 
 	public List<Amortizacion> consultarAmortizaciones() {
 
-		List<Amortizacion> deudasPendientes=new ArrayList<Amortizacion>();
+		List<Amortizacion> deudasPendientes = new ArrayList<Amortizacion>();
 
 		for (Amortizacion amortizacion : this.amortizaciones) {
 			if (!amortizacion.getPagado()) {
