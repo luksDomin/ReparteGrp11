@@ -64,6 +64,7 @@ public class Grupo {
                 Double cantidadRepartida = cantidad / numUsuarios;
 
                 for (Usuario miembroGrupo : this.getUsers()) {
+                	if(miembroGrupo.getNombre().equals(acreedor.getNombre()))continue;
                 	if(amortizaciones_creadas == null) amortizaciones_creadas = new ArrayList<>();
                 	amortizaciones_creadas.add(miembroGrupo.addAmortizacion(acreedor, cantidadRepartida));
                 }
