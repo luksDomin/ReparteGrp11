@@ -52,8 +52,8 @@ public class Grupo {
         }
     }
 
-    public void anadirGasto(Usuario acreedor, Gasto gasto) {
-
+    public ArrayList<Amortizacion>  anadirGasto(Usuario acreedor, Gasto gasto) {
+    	ArrayList<Amortizacion> amortizaciones_creadas = null;
         if (acreedor != null && gasto != null) {
 
             int numUsuarios = this.getUsers().size();
@@ -64,10 +64,12 @@ public class Grupo {
                 Double cantidadRepartida = cantidad / numUsuarios;
 
                 for (Usuario miembroGrupo : this.getUsers()) {
-                    miembroGrupo.addAmortizacion(acreedor, cantidadRepartida);
+                	if(amortizaciones_creadas == null) amortizaciones_creadas = new ArrayList<>();
+                	amortizaciones_creadas.add(miembroGrupo.addAmortizacion(acreedor, cantidadRepartida));
                 }
             }
         }
+        return amortizaciones_creadas;
     }
 
     public ArrayList<Usuario> anhadirUsuarios(ArrayList<Usuario> usuarios) {

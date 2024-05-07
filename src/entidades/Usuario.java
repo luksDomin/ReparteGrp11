@@ -53,8 +53,9 @@ public class Usuario {
 	}
 
 	
-	public void addAmortizacion(Usuario acreedor, Double cantidad) {
+	public Amortizacion addAmortizacion(Usuario acreedor, Double cantidad) {
 		int encontrado = 0;
+		Amortizacion a = null;
 		// Nuevas amortizaciones
 		for (Amortizacion amortizacion : this.amortizaciones) {
 			if (amortizacion.getAcreedor().equals(acreedor)) {
@@ -65,14 +66,16 @@ public class Usuario {
 				}else {
 					amortizacion.setCantidad(amortizacion.getCantidad() + cantidad);
 				}
+				a = amortizacion;
 			}
 		}
 		if(encontrado == 0) {
-			Amortizacion a = new Amortizacion(cantidad,acreedor,this);
+			a = new Amortizacion(cantidad,acreedor,this);
 			a.setPagado(false);
 			this.amortizaciones.add(a);
 
 		}
+		return a;
 	}
 
 	public List<Amortizacion> consultarAmortizaciones() {
