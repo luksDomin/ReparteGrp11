@@ -20,19 +20,21 @@ public class Gasto {
 			System.out.println("Valor cantidad incorrecto");
 
 		}
-		if (grupo == null) {
+		else if (grupo == null) {
 			// lanzar excecpcion
 			System.out.println("Valor de grupo NULL");
 		}
-		if (usuarioCreador == null) {
+		else if (usuarioCreador == null) {
 			// lanzar excecpcion
 			System.out.println("Valor de UsuarioCreador NULL");
 		}
-		this.id = new Random().nextInt();
-		this.cantidad = cantidad;
-		this.grupo = grupo;
-		grupo.anadirGasto(usuarioCreador, this);
-		this.usuarioCreador = usuarioCreador;
+		else{
+			this.id = new Random().nextInt();
+			this.cantidad = cantidad;
+			this.grupo = grupo;
+			grupo.anadirGasto(usuarioCreador, this);
+			this.usuarioCreador = usuarioCreador;
+		}
 	}
 
 	public Integer getId() {
