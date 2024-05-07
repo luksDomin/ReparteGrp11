@@ -52,8 +52,10 @@ public class Usuario {
 		Gasto g = new Gasto(cantidad, grupo, this);
 	}
 
+	
 	public void addAmortizacion(Usuario acreedor, Double cantidad) {
 
+		// Nuevas amortizaciones
 		for (Amortizacion amortizacion : this.amortizaciones) {
 			if (amortizacion.getAcreedor().equals(acreedor)) {
 				if (!amortizacion.getPagado()) {
@@ -107,4 +109,5 @@ public class Usuario {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
+	
 }
